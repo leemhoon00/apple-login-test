@@ -9,8 +9,8 @@ export class AppController {
     const { code, id_token } = body;
     const decodedToken = jwtDecode(id_token);
 
-    // console.log('code:', code);
-    // console.log('decodedToken:', decodedToken);
+    console.log('code:', code);
+    console.log('decodedToken:', decodedToken);
 
     const publicKeys = await getApplePublicKey();
     console.log(publicKeys);
