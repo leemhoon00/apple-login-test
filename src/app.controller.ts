@@ -5,15 +5,19 @@ import { jwtDecode } from 'jwt-decode';
 @Controller()
 export class AppController {
   @Post('/apple-login')
-  appleLogin(@Body() body: AppleLoginDto) {
+  async appleLogin(@Body() body: AppleLoginDto) {
     const { code, id_token } = body;
     const decodedToken = jwtDecode(id_token);
 
     // console.log('code:', code);
     // console.log('decodedToken:', decodedToken);
 
-    const publicKeys = getApplePublicKey();
+    const publicKeys = await getApplePublicKey();
     console.log(publicKeys);
+
+    return {
+      message: 'Apple login successful',
+    };
   }
 }
 
