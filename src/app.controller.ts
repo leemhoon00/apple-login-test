@@ -7,10 +7,12 @@ export class AppController {
   @Post('/apple-login')
   async appleLogin(@Body() body: AppleLoginDto) {
     const { code, id_token } = body;
+    const decodedHeaders = jwtDecode(id_token, { header: true });
     const decodedToken = jwtDecode(id_token);
 
     console.log('code:', code);
     console.log('decodedToken:', decodedToken);
+    console.log('decodedHeaders:', decodedHeaders);
 
     const publicKeys = await getApplePublicKey();
     console.log(publicKeys);
